@@ -1,0 +1,3 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[-1]}" )" &> /dev/null && pwd )"
+
+lua5.1 $SCRIPT_DIR/ned.lua "$@"
