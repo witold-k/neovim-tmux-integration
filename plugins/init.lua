@@ -14,7 +14,7 @@ vim.opt.tabstop = 4       -- number of visual spaces per TAB
 vim.opt.softtabstop = 4   -- number of spaces in tab when editing
 vim.opt.shiftwidth = 4    -- number of spaces to use for autoindent
 vim.opt.expandtab = true  -- tabs are space
-vim.opt.autoindent = true 
+vim.opt.autoindent = true
 vim.opt.copyindent = true -- copy indent from the previous line
 
 -- line wrapping
@@ -30,12 +30,13 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
--- configure plugins 
+-- configure plugins
 require('keys')
 require('bookmarks-config')
 require('lualine-config')
 require('nightfox-config')
 require('nvim-tree-config')
 require('telescope-config')
+
 
 -- require('orgmode-config')

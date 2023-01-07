@@ -1,6 +1,6 @@
 # Neovim Tmux integration
 
-a simple neovim tmux integration.
+a simple neovim tmux integration for an ide like user experience.
 also appendend te following neovim plugins:
 
     - bookmarks
@@ -16,6 +16,9 @@ configure tmux `tmux.conf` with:
     set -g default-terminal "screen-256color"
 ```
 
+This is a minimal setup, code completion and formatting are not
+configured here.
+
 # Installation
 
 just execute ./setup.sh in this directory.
@@ -28,4 +31,14 @@ that are using the `apt` command to install packages.
 - execute `nide` to start the neovim ide
 - execute `ned <filename>` to edit a file
 - execute `ned <filename>:row[:column]` to edit a file and jump to a position
+
+# Links and Hints
+
+- [Neovim quickref](https://neovim.io/doc/user/quickref.html)
+- [Neovim for beginner](https://github.com/alpha2phi/neovim-for-beginner)
+- [Video configure neovim](https://www.youtube.com/watch?v=vdn_pKJUda8)
+
+# useful lua extensions
+
+- [package "path"](https://luapower.com/path#path)
 
