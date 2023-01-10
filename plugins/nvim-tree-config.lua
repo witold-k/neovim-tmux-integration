@@ -43,6 +43,7 @@ require("nvim-tree").setup({
   },
   renderer = {
     group_empty = true,
+    symlink_destination = false,
   },
   filters = {
     dotfiles = true,

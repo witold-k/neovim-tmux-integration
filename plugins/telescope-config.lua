@@ -1,5 +1,11 @@
 local map = vim.api.nvim_set_keymap
 
+require('telescope').setup {
+    defaults = {
+        path_display = {"truncate"},
+    }
+}
+
 --  <Leader> key is mapped to \ by default
 
 local builtin = require('telescope.builtin')

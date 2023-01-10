@@ -34,6 +34,7 @@ that are using the `apt` command to install packages.
 
 # Links and Hints
 
+- [Neovim editing/navigation](https://neovim.io/doc/user/change.html)
 - [Neovim quickref](https://neovim.io/doc/user/quickref.html)
 - [Neovim for beginner](https://github.com/alpha2phi/neovim-for-beginner)
 - [Video configure neovim](https://www.youtube.com/watch?v=vdn_pKJUda8)
