@@ -56,4 +56,5 @@ end
 
 map('n', '<leader>y', [[ :lua copy_register_to_tmux()<CR> ]], { })
 map('v', '<leader>y', [[ :lua copy_visual_to_tmux()<CR> ]], { })
+map('n', '<C-x>', [[ :bd<CR>:bn<CR> ]], { })
 
