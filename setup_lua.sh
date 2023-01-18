@@ -7,7 +7,7 @@
 if [ "$USER" != "root" ];
 then
     echo "user is not root - executing as root"
-    sudo bash $0
+    sudo -E bash $0
     exit
 fi
 

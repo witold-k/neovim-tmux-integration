@@ -26,7 +26,12 @@ vim.opt.smartcase = true
 
 -- remove trailing whitespaces
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*.h*", "*.c*", "*.java", "*.lua", "*.py" },
+  pattern = { "*.h", "*.c", "*.hpp", "*.cpp", "*.cmake",
+              "*.java", "*.lua", "*.py", "*.sh", "*.el",
+              "*.bb", "*.bbclass",
+              "*.dts", "*.dtsi",
+              "**.md"
+  },
   command = [[%s/\s\+$//e]],
 })
 

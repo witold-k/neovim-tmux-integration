@@ -11,7 +11,7 @@ map('i', 'jk', '', {})
 -- https://github.com/nvim-tree/nvim-tree.lua
 -- Toggle nvim-tree
 map('n', '<leader>n', [[:NvimTreeToggle<CR>]], {})
-map('n', '<leader>t', [[:NvimTreeFindFile<CR>]], {})
+map('n', '<F8>', [[:NvimTreeFindFile<CR>]], {})
 --shell
 local function shell_escape(args)
 	local ret = {}
@@ -56,5 +56,5 @@ end
 
 map('n', '<leader>y', [[ :lua copy_register_to_tmux()<CR> ]], { })
 map('v', '<leader>y', [[ :lua copy_visual_to_tmux()<CR> ]], { })
-map('n', '<C-x>', [[ :bd<CR>:bn<CR> ]], { })
+map('n', '<C-x>', [[ :bp<bar>sp<bar>bn<bar>bd<CR> ]], { })
 
