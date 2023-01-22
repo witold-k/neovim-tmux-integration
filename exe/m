@@ -10,7 +10,14 @@ fi
 
 build=~/$BUILD_TMP_DIR/work/build.log
 
-make $@ |& tee $build
+GTL=$(git rev-parse --show-toplevel)
+
+if [ -z "$GTL" ];
+then
+    make $@ |& tee $build
+else
+    make -C $GTL $@ |& tee $build
+fi
 
 echo $build
 
