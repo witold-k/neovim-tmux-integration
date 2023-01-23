@@ -2,10 +2,10 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-BUILD_TMP_DIR=svn
+BUILD_TMP_DIR=.tmp
 
 if [ ! -d ~/$BUILD_TMP_DIR/work ]; then
-    mkdir ~/$BUILD_TMP_DIR/work
+    mkdir -p ~/$BUILD_TMP_DIR/work
 fi
 
 build=~/$BUILD_TMP_DIR/work/build.log
