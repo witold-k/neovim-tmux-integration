@@ -32,6 +32,25 @@ that are using the `apt` command to install packages.
 - execute `ned <filename>` to edit a file
 - execute `ned <filename>:row[:column]` to edit a file and jump to a position
 
+
+## First run
+
+to start neovim with tmux just type in console:
+```
+    nide
+```
+
+then install the packages in neovim:
+```
+    :PackerUpdate
+```
+
+after restart neovin install Mason packages:
+```
+    :MasonInstall codelldb rust-analyzer cpptools lua-language-server cmake-language-server
+
+```
+
 # Links and Hints
 
 - [Neovim editing/navigation](https://neovim.io/doc/user/change.html)

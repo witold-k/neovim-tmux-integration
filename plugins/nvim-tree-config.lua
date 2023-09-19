@@ -25,6 +25,21 @@ local function tmux_ch_dir()
     os.execute(cmd)
 end
 
+
+-- local function open_by_suffix()
+--     local node = Api.tree.get_node_under_cursor()
+--     local path = Path:new(node.absolute_path)
+--     if (not path:is_dir()) then
+--         local app = '';
+--         local suffix = path.suffix();
+--         if (suffix == '.pdf') then app = 'evince'; end
+--
+--         local cmd = app + '/' + path
+--         os.execute(cmd)
+--     end
+-- end
+
+
 -- empty setup using defaults
 -- require("nvim-tree").setup()
 
@@ -37,7 +52,7 @@ require("nvim-tree").setup({
       list = {
         { key = "u", action = "dir_up" },
         { key = "H", action = "cd" },
-        { key = "Y", action = "chdir_tmux", action_cb = tmux_ch_dir },
+        { key = "<F4>", action = "chdir_tmux", action_cb = tmux_ch_dir },
       },
     },
   },

@@ -26,11 +26,13 @@ vim.opt.smartcase = true
 
 -- remove trailing whitespaces
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*.h", "*.c", "*.hpp", "*.cpp", "*.cmake",
+  pattern = { "*.h", "*.c", "*.hpp", "*.cpp", "*.rs", "*.in",
+              "CMake*.txt", "*.cmake",
               "*.java", "*.lua", "*.py", "*.sh", "*.el",
               "*.bb", "*.bbclass",
               "*.dts", "*.dtsi",
-              "**.md"
+              "**.md", "*.inc",
+              "Makefile", "Dockerfile",
   },
   command = [[%s/\s\+$//e]],
 })
@@ -42,6 +44,45 @@ require('lualine-config')
 require('nightfox-config')
 require('nvim-tree-config')
 require('telescope-config')
+require('rust-tools-config')
+require('mason-config')
+require('cmp-config')
+require('nvim-treesitter-config')
+require('trouble-config')
 
+require("mason-lspconfig").setup()
+
+-- LSP Diagnostics Options Setup
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+sign({name = 'DiagnosticSignError', text = ''})
+sign({name = 'DiagnosticSignWarn', text = ''})
+sign({name = 'DiagnosticSignHint', text = ''})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
 
 -- require('orgmode-config')
