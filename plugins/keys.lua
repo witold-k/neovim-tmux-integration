@@ -11,6 +11,7 @@ map('i', 'jk', '', {})
 -- https://github.com/nvim-tree/nvim-tree.lua
 -- Toggle nvim-tree
 map('n', '<leader>n', [[:NvimTreeToggle<CR>]], {})
+map('n', '<leader>r', [[:TroubleToggle<CR>]], {})
 map('n', '<F7>', [[:NvimTreeFindFile<CR>]], {})
 --shell
 local function shell_escape(args)
@@ -33,7 +34,7 @@ function copy_register_to_tmux()
     -- "tmux paste" for dump buffer content to terminal
 end
 
--- selecttion to tmux
+-- selection to tmux
 function copy_visual_to_tmux()
     local s_start = vim.api.nvim_buf_get_mark(0, "<")
     local s_end   = vim.api.nvim_buf_get_mark(0, ">")

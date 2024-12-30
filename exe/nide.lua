@@ -17,7 +17,7 @@ if (attr == nil) or (attr.mode ~= "directory") then
 end
 
 local pipepath = runtime_nvim .. '/ide.pipe'
-local cmd = 'tmux send-keys -t ide C-m \"nvim --listen ' .. pipepath .. '\" C-m'
+local cmd = 'tmux send-keys -t ide C-m \"PYTHONPATH=$HOME/svn/buildscripts/python nvim --listen ' .. pipepath .. '\" C-m'
 
 if (doExecute) then
     os.execute(cmd)

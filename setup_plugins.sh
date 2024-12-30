@@ -37,6 +37,6 @@ then
     # install neovim packer plugin
     mkdir -p ~/.local/share/nvim/site/pack/packer/start/ 
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-        ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+        ~/.local/share/nvim/site/pack/packer/start/packer.nvim || exit
 fi
 
