@@ -1,5 +1,8 @@
 _G.vim = vim -- make lsp checker happy
 
+local Path     = require "plenary.path"
+local Nvimtree = require "nvim-tree.api"
+
 local map = vim.api.nvim_set_keymap
 -- https://neovim.io/doc/user/api.html#nvim_set_keymap()
 -- nvim_set_keymap({mode}, {lhs}, {rhs}, {*opts}) nvim_set_keymap() Sets a global mapping for the given mode.
@@ -11,13 +14,13 @@ map('i', 'jk', '', {})
 -- https://github.com/nvim-tree/nvim-tree.lua
 -- Toggle nvim-tree
 map('n', '<leader>n', [[:NvimTreeToggle<CR>]], {})
-map('n', '<leader>r', [[:Trouble diagnostics<CR>]], {})
+map('n', '<leader>r', [[:Trouble diagnostics toggle<CR>]], {})
 map('n', '<F7>', [[:NvimTreeFindFile<CR>]], {})
 --shell
 local function shell_escape(args)
 	local ret = {}
 	for _,a in pairs(args) do
-		s = tostring(a)
+		local s = tostring(a)
 		if s:match("[^A-Za-z0-9_/:=-]") then
 			s = "'"..s:gsub("'", "'\\''").."'"
 		end
@@ -54,8 +57,25 @@ function copy_visual_to_tmux()
     os.execute(shell_escape(cmd))
 end
 
+-- setup project dir, configures :makeprg=
+-- calling make will build and forward to trouble diagnostics
+function Load_neovim_project_config()
+    local node = Nvimtree.tree.get_node_under_cursor()
+    local path = tostring(Path:new(node.absolute_path)) .. '/.neovim/projectconf.lua'
+    print("project path: " .. path)
+    dofile(path)
+    return path
+end
 
 map('n', '<leader>y', [[ :lua copy_register_to_tmux()<CR> ]], { })
 map('v', '<leader>y', [[ :lua copy_visual_to_tmux()<CR> ]], { })
 map('n', '<C-x>', [[ :bp<bar>sp<bar>bn<bar>bd<CR> ]], { })
+
+-- map setup project dir
+map('n', '<leader>s', [[ :lua Load_neovim_project_config()<CR> ]], { })
+map('v', '<reader>s', [[ :lua Load_neovim_project_config()<CR> ]], { })
+
+-- map setup project dir
+map('n', '<leader>b', [[ :make<CR> ]], { })
+map('v', '<leader>b', [[ :make<CR> ]], { })
 
