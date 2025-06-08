@@ -1,9 +1,17 @@
 local home = os.getenv("HOME")
+local path = require('pl.path')
+
+local nvim_path = vim.loop.exepath()
+local nvim_lua  = path.normpath(nvim_path .. '/../../../share/nvim/runtime/lua') .. '/?.lua'
+-- print('nvim main   lua path: ' .. nvim_lua)
+
 local config = home .. '/.config/nvim'
+local config_lua = config .. '/?.lua'
+-- print('nvim config lua path: ' .. config_lua)
 
-package.path = package.path .. ';' .. config .. '/?.lua'
+package.path = package.path .. ';' .. config_lua .. ';' .. nvim_lua
 
-require('plugins')
+require('lazy-config')
 
 -- line numbers
 vim.opt.number = true
@@ -27,7 +35,7 @@ vim.opt.smartcase = true
 -- remove trailing whitespaces
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*.h", "*.c", "*.hh", "*.cc", "*.hpp", "*.cpp", "*.rs", "*.in",
-              "CMake*.txt", "*.cmake",
+              "CMake*.txt", "*.cmake", "*meson",
               "*.java", "*.lua", "*.py", "*.sh", "*.el",
               "*.xml", "*.html",
               "*.bb", "*.bbclass",
@@ -39,25 +47,38 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
+require('plugins')
+
 -- configure plugins
 require('keys')
 require('bookmarks-config')
 require('lspconfig-config')
-require('lualine-config')
-require('nightfox-config')
-require('nvim-tree-config')
-require('telescope-config')
 require('rust-tools-config')
 require('mason-config')
--- require('cmp-config')
+require('cmp-config')
 require('nvim-treesitter-config')
 require('trouble-config')
 require('lspconfig-jdtls-config')
-require("mason-lspconfig").setup()
+require('mason-lspconfig')
+require('maven-config')
+
+-- gui
+require('nvim-tree-config')
+require('lualine-config')
+require('nightfox-config')
+require('telescope-config')
+require('hop-config')
+
+-- ai
+require('cmp-ai-config')
+require('minuet-config')
+
+-- org
+-- require('orgmode-config')
 
 vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
--- require('orgmode-config')
+

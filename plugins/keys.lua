@@ -11,7 +11,7 @@ map('i', 'jk', '', {})
 -- https://github.com/nvim-tree/nvim-tree.lua
 -- Toggle nvim-tree
 map('n', '<leader>n', [[:NvimTreeToggle<CR>]], {})
-map('n', '<leader>r', [[:TroubleToggle<CR>]], {})
+map('n', '<leader>r', [[:Trouble diagnostics<CR>]], {})
 map('n', '<F7>', [[:NvimTreeFindFile<CR>]], {})
 --shell
 local function shell_escape(args)

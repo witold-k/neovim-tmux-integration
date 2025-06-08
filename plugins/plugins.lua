@@ -1,106 +1,120 @@
-vim.cmd [[packadd packer.nvim]]
-
-return require('packer').startup(function(use)
-  use { "wbthomason/packer.nvim" } -- let packer manage itself
-
-  use {
+return require('lazy').setup({
+  {
+    'saecki/crates.nvim',
+    tag = 'stable',
+    config = function()
+        require('crates').setup()
+    end,
+  },
+  {
     'nvim-tree/nvim-tree.lua',
-    requires = {
+    dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
-  }
+  },
 
-  use {
+  {
     'nvim-lua/plenary.nvim'
-  }
+  },
 
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.4',
--- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
 
-  use {
+  {
     'neovim/nvim-lspconfig'
-  }
+  },
 
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
     -- :TSUpdate[Sync] doesn't exist until plugin/nvim-treesitter is loaded (i.e. not after first install); call update() directly
-    run = function() require("nvim-treesitter.install").update { with_sync = true } end
-  }
+    build = function() require("nvim-treesitter.install").update { with_sync = true } end
+  },
 
-  use {
+  {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+    dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+  },
 
-  use {
+  {
     'sindrets/diffview.nvim',
-    requires = 'nvim-lua/plenary.nvim'
-  }
+    dependencies = 'nvim-lua/plenary.nvim'
+  },
 
-  use {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
+  {
+    'smoka7/hop.nvim',
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
-  }
+  },
 
-  use {
+  {
     'crusj/bookmarks.nvim',
     branch = 'main',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+    dependencies = { 'kyazdani42/nvim-web-devicons' }
+  },
 
-  use "EdenEast/nightfox.nvim"
+  "EdenEast/nightfox.nvim",
 
-  use {
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = { "jdtls" },
     },
-  }
+  },
 
-  use 'williamboman/mason-lspconfig.nvim'
+  'williamboman/mason-lspconfig.nvim',
 
-  use 'simrat39/rust-tools.nvim'
-  use 'mfussenegger/nvim-dap'
+  'simrat39/rust-tools.nvim',
 
-  use {
+  -- debugger
+  'mfussenegger/nvim-dap',
+
+  {
     "eatgrass/maven.nvim",
-     cmd = { "mvn" },
-     dependencies = "nvim-lua/plenary.nvim",
-     config = function()
-       require('maven').setup({ executable = "mvn" })
-     end
-  }
---  use {
+    cmd = { "Maven", "MavenExec" },
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require('maven').setup({
+        executable="mvn"
+      })
+    end
+  },
+
+--  {
 --    'nvim-orgmode/orgmode',
 --    config = function() require('orgmode').setup{} end
---  }
+--  },
 
   -- Completion framework:
---  use 'hrsh7th/nvim-cmp'
+  'Saghen/blink.cmp',
+  'hrsh7th/nvim-cmp',
 
   -- LSP completion source:
---  use 'hrsh7th/cmp-nvim-lsp'
+  'hrsh7th/cmp-nvim-lsp',
 
   -- Useful completion sources:
---  use 'hrsh7th/cmp-nvim-lua'
---  use 'hrsh7th/cmp-nvim-lsp-signature-help'
---  use 'hrsh7th/cmp-vsnip'
---  use 'hrsh7th/cmp-path'
---  use 'hrsh7th/cmp-buffer'
---  use 'hrsh7th/vim-vsnip'
+  'hrsh7th/cmp-nvim-lua',
+  'hrsh7th/cmp-nvim-lsp-signature-help',
+  'hrsh7th/cmp-vsnip',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-buffer',
 
+  {
+      'milanglacier/minuet-ai.nvim',
+      config = function()
+          require('minuet').setup {
+              -- Your configuration options here
+          }
+      end,
+  },
 
   -- compiler output
-  use {
+  {
     'folke/trouble.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+    dependencies = { 'kyazdani42/nvim-web-devicons' }
+  },
 
-end)
+})

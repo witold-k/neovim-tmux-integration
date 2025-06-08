@@ -13,6 +13,7 @@ require("mason-lspconfig").setup({
         "clangd",
         "grammarly",
         "java_language_server",
+        "cmake",
         "jdtls",
         "jsonnet_ls",
         "lua_ls",
