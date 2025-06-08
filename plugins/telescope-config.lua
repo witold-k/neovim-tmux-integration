@@ -1,6 +1,7 @@
+_G.vim = vim -- make lsp checker happy
+
 -- https://vimawesome.com/plugin/telescope-nvim-care-of-itself
 
-local map = vim.api.nvim_set_keymap
 local Path = require "plenary.path"
 local Nvimtree = require "nvim-tree.api"
 

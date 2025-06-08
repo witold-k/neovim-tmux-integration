@@ -1,4 +1,4 @@
--- keys.lua
+_G.vim = vim -- make lsp checker happy
 
 local map = vim.api.nvim_set_keymap
 -- https://neovim.io/doc/user/api.html#nvim_set_keymap()

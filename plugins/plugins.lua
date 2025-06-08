@@ -83,10 +83,11 @@ return require('lazy').setup({
     end
   },
 
---  {
---    'nvim-orgmode/orgmode',
---    config = function() require('orgmode').setup{} end
---  },
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' }
+  },
 
   -- Completion framework:
   'Saghen/blink.cmp',

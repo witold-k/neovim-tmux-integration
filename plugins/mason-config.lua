@@ -18,11 +18,13 @@ require("mason-lspconfig").setup({
         "jsonnet_ls",
         "lua_ls",
         "marksman",
+        "matlab_ls",
         "mesonlsp",
         "pyright",
         "pylsp",
         "rust_analyzer",
         "texlab",
+        "yamlls",
     }
 })
 

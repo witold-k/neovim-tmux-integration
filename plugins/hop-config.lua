@@ -1,6 +1,7 @@
 -- place this in one of your configuration file(s)
+_G.vim = vim -- make lsp checker happy
+
 local hop = require('hop')
-local directions = require('hop.hint').HintDirectiona
 
 vim.keymap.set('', 'hw', function()
   hop.hint_words()

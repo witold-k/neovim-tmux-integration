@@ -1,3 +1,5 @@
+_G.vim = vim -- make lsp checker happy
+
 local rt = require("rust-tools")
 
 rt.setup({

@@ -1,3 +1,5 @@
+_G.vim = vim -- make lsp checker happy
+
 local home = os.getenv("HOME")
 local path = require('pl.path')
 
@@ -36,7 +38,7 @@ vim.opt.smartcase = true
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*.h", "*.c", "*.hh", "*.cc", "*.hpp", "*.cpp", "*.rs", "*.in",
               "CMake*.txt", "*.cmake", "*meson",
-              "*.java", "*.lua", "*.py", "*.sh", "*.el",
+              "*.java", "*.lua", "*.py", "*.sh", "*.el", "*.json",
               "*.xml", "*.html",
               "*.bb", "*.bbclass",
               "*.dts", "*.dtsi",
@@ -58,7 +60,6 @@ require('mason-config')
 require('cmp-config')
 require('nvim-treesitter-config')
 require('trouble-config')
-require('lspconfig-jdtls-config')
 require('mason-lspconfig')
 require('maven-config')
 
@@ -74,7 +75,7 @@ require('cmp-ai-config')
 require('minuet-config')
 
 -- org
--- require('orgmode-config')
+require('orgmode-config')
 
 vim.cmd([[
 set signcolumn=yes
