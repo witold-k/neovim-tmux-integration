@@ -50,6 +50,8 @@ return require('lazy').setup({
     end
   },
 
+  'ggandor/leap.nvim',
+
   {
     'crusj/bookmarks.nvim',
     branch = 'main',
@@ -90,7 +92,7 @@ return require('lazy').setup({
   },
 
   -- Completion framework:
-  'Saghen/blink.cmp',
+  -- 'Saghen/blink.cmp',
   'hrsh7th/nvim-cmp',
 
   -- LSP completion source:
@@ -103,13 +105,10 @@ return require('lazy').setup({
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-buffer',
 
+  -- 'julwrites/llm-nvim',
   {
-      'milanglacier/minuet-ai.nvim',
-      config = function()
-          require('minuet').setup {
-              -- Your configuration options here
-          }
-      end,
+    "nomnivore/ollama.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", }
   },
 
   -- compiler output

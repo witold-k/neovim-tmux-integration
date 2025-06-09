@@ -57,11 +57,15 @@ require('bookmarks-config')
 require('lspconfig-config')
 require('rust-tools-config')
 require('mason-config')
-require('cmp-config')
 require('nvim-treesitter-config')
 require('trouble-config')
 require('mason-lspconfig')
 require('maven-config')
+
+-- completion / code generation
+require('cmp-config')
+-- require('llm-vim-config')
+require('ollama-config')
 
 -- gui
 require('nvim-tree-config')
@@ -69,10 +73,7 @@ require('lualine-config')
 require('nightfox-config')
 require('telescope-config')
 require('hop-config')
-
--- ai
-require('cmp-ai-config')
-require('minuet-config')
+require('leap-config')
 
 -- org
 require('orgmode-config')
@@ -81,5 +82,4 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
-
 
