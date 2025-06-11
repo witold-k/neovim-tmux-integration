@@ -27,6 +27,9 @@ local function nvim_tree_dir()
     end
 
     local pathstr = tostring(path)
+    if (not vim.loop.fs_stat(pathstr)) then
+        return vim.fn.getcwd()
+    end
     -- vim.notify("path is: " .. path, vim.log.levels.ERROR)
     return pathstr
 end

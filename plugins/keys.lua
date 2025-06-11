@@ -4,12 +4,25 @@ local Path     = require "plenary.path"
 local Nvimtree = require "nvim-tree.api"
 
 local map = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
+
 -- https://neovim.io/doc/user/api.html#nvim_set_keymap()
 -- nvim_set_keymap({mode}, {lhs}, {rhs}, {*opts}) nvim_set_keymap() Sets a global mapping for the given mode.
 
+local opts = { noremap = true, silent = true }
 
 -- remap the key used to leave insert mode
 map('i', 'jk', '', {})
+
+-- Stay in indent mode
+keymap("v", "<", "<gv^", opts)
+keymap("v", ">", ">gv^", opts)
+keymap("v", "p", '"_dP', opts)
+
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
 
 -- https://github.com/nvim-tree/nvim-tree.lua
 -- Toggle nvim-tree
