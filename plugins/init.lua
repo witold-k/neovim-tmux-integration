@@ -50,22 +50,23 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 require('plugins')
+require('keys')
 
 -- configure plugins
-require('keys')
 require('bookmarks-config')
+require('crates-config')
+require('diagnostic-config')
+require('faster-config')
 require('lspconfig-config')
-require('rust-tools-config')
 require('mason-config')
-require('nvim-treesitter-config')
-require('trouble-config')
 require('mason-lspconfig')
 require('maven-config')
+require('nvim-treesitter-config')
+require('rust-tools-config')
+require('trouble-config')
 
 -- completion / code generation
 require('cmp-config')
--- require('llm-vim-config')
-require('ollama-config')
 
 -- gui
 require('nvim-tree-config')

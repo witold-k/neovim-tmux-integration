@@ -3,6 +3,8 @@ _G.vim = vim -- make lsp checker happy
 
 local hop = require('hop')
 
+hop.setup({ keys = 'etovxqpdygfblzhckisuran' })
+
 vim.keymap.set('', 'hw', function()
   hop.hint_words()
 end, {remap=true})

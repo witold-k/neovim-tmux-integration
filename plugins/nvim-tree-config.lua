@@ -25,7 +25,6 @@ local function tmux_ch_dir()
     os.execute(cmd)
 end
 
-
 -- local function open_by_suffix()
 --     local node = Api.tree.get_node_under_cursor()
 --     local path = Path:new(node.absolute_path)
@@ -60,7 +59,7 @@ end
 
 -- OR setup with some options
 require("nvim-tree").setup({
- sort_by = "case_sensitive",
+  sort_by = "case_sensitive",
   on_attach = my_on_attach,
   actions = {
     change_dir = { enable = false }
@@ -69,13 +68,6 @@ require("nvim-tree").setup({
     width = {
         max = 50
     },
-    -- mappings = {
-    --   list = {
-    --     { key = "u", action = "dir_up" },
-    --     { key = "H", action = "cd" },
-    --     { key = "<F4>", action = "chdir_tmux", action_cb = tmux_ch_dir },
-    --   },
-    -- },
   },
   renderer = {
     group_empty = true,

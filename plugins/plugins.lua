@@ -1,10 +1,9 @@
 return require('lazy').setup({
+  'pteroctopus/faster.nvim',
+
   {
     'saecki/crates.nvim',
     tag = 'stable',
-    config = function()
-        require('crates').setup()
-    end,
   },
   {
     'nvim-tree/nvim-tree.lua',
@@ -13,18 +12,14 @@ return require('lazy').setup({
     },
   },
 
-  {
-    'nvim-lua/plenary.nvim'
-  },
+  'nvim-lua/plenary.nvim',
 
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
-  {
-    'neovim/nvim-lspconfig'
-  },
+  'neovim/nvim-lspconfig',
 
   {
     'nvim-treesitter/nvim-treesitter',
@@ -42,14 +37,9 @@ return require('lazy').setup({
     dependencies = 'nvim-lua/plenary.nvim'
   },
 
-  {
-    'smoka7/hop.nvim',
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end
-  },
+  -- navigation
 
+  'smoka7/hop.nvim',
   'ggandor/leap.nvim',
 
   {
@@ -77,12 +67,7 @@ return require('lazy').setup({
   {
     "eatgrass/maven.nvim",
     cmd = { "Maven", "MavenExec" },
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require('maven').setup({
-        executable="mvn"
-      })
-    end
+    dependencies = "nvim-lua/plenary.nvim"
   },
 
   {
@@ -104,12 +89,6 @@ return require('lazy').setup({
   'hrsh7th/cmp-vsnip',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-buffer',
-
-  -- 'julwrites/llm-nvim',
-  {
-    "nomnivore/ollama.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", }
-  },
 
   -- compiler output
   {

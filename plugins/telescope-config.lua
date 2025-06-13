@@ -2,37 +2,7 @@ _G.vim = vim -- make lsp checker happy
 
 -- https://vimawesome.com/plugin/telescope-nvim-care-of-itself
 
-local Path = require "plenary.path"
-local Nvimtree = require "nvim-tree.api"
-
-local function nvim_tree_dir()
-    local node = Nvimtree.tree.get_node_under_cursor()
-    if (not node) then
-        -- vim.notify("node is nil", vim.log.levels.ERROR)
-        return vim.fn.getcwd()
-    end
-
-    local path = Path:new(node.absolute_path)
-    if (not path) then
-        -- vim.notify("path is nil", vim.log.levels.ERROR)
-        return vim.fn.getcwd()
-    end
-
-    if (not path:is_dir()) then
-        path = path:parent()
-    end
-    if (not path) then
-        -- vim.notify("path is nil", vim.log.levels.ERROR)
-        return vim.fn.getcwd()
-    end
-
-    local pathstr = tostring(path)
-    if (not vim.loop.fs_stat(pathstr)) then
-        return vim.fn.getcwd()
-    end
-    -- vim.notify("path is: " .. path, vim.log.levels.ERROR)
-    return pathstr
-end
+local ntt = require('nvim-tree-tools')
 
 require('telescope').setup {
     defaults = {
@@ -67,7 +37,7 @@ local builtin = require('telescope.builtin')
 
 local ff = function()
     local opts = {
-        cwd = nvim_tree_dir(), -- Dynamically set the search directory
+        cwd = ntt.nvim_tree_dir(), -- Dynamically set the search directory
         hidden = true, -- Include hidden files
         no_ignore = true, -- Ignore `.gitignore` rules
     }
@@ -77,7 +47,7 @@ end
 
 local lg = function()
     local opts = {
-        cwd = nvim_tree_dir(), -- Dynamically set the search directory
+        cwd = ntt.nvim_tree_dir(), -- Dynamically set the search directory
         hidden = true, -- Include hidden files
         no_ignore = true, -- Ignore `.gitignore` rules
     }
