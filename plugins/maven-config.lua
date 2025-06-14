@@ -1,6 +1,6 @@
 _G.vim = vim -- make lsp checker happy
 
-maven = require('maven')
+local maven = require('maven')
 
 maven.setup({
   executable = "mvn", -- `mvn` should be in your `PATH`, or the path to the maven exectable, for example `./mvnw`

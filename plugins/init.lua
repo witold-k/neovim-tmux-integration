@@ -50,6 +50,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 require('plugins')
+require('luarocks-config')
+
 require('keys')
 
 -- configure plugins
