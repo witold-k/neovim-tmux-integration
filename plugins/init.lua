@@ -13,7 +13,8 @@ local config_lua = config .. '/?.lua'
 
 package.path = package.path .. ';' .. config_lua .. ';' .. nvim_lua
 
-require('lazy-config')
+require('lazy-setup')
+require('neorocks-setup')
 
 -- line numbers
 vim.opt.number = true

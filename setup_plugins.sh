@@ -7,7 +7,7 @@ then
 fi
 
 echo "INSTALLING Neovim plugins..."
-echo "create links in $DEST_DIR ..." 
+echo "create links in $DEST_DIR ..."
 
 # copy local files
 cd $SCRIPT_DIR/plugins
@@ -28,15 +28,6 @@ cd $SCRIPT_DIR/exe
 for FILE in $(ls)
 do
     echo "install: $FILE"
-    ln -sf $SCRIPT_DIR/exe/$FILE ~/bin 
+    ln -sf $SCRIPT_DIR/exe/$FILE ~/bin
 done
-
-
-if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ];
-then
-    # install neovim packer plugin
-    mkdir -p ~/.local/share/nvim/site/pack/packer/start/ 
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-        ~/.local/share/nvim/site/pack/packer/start/packer.nvim || exit
-fi
 
