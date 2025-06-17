@@ -1,3 +1,4 @@
+
 return require('lazy').setup({
   {
    'vhyrro/luarocks.nvim',
@@ -15,6 +16,11 @@ return require('lazy').setup({
     dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
+  },
+
+  {
+    'kiyoon/tmux-send.nvim',
+    keys = require('tmux-send-config').keys
   },
 
   'nvim-lua/plenary.nvim',
