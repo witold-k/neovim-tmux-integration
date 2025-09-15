@@ -52,7 +52,8 @@ return require('lazy').setup({
   -- navigation
 
   'smoka7/hop.nvim',
-  'ggandor/leap.nvim',
+  -- 'ggandor/leap.nvim',
+  'folke/flash.nvim',
 
   {
     'crusj/bookmarks.nvim',
@@ -107,5 +108,5 @@ return require('lazy').setup({
     'folke/trouble.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
-
+  require('flash-config')
 })

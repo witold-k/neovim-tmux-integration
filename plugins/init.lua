@@ -1,6 +1,16 @@
 _G.vim = vim -- make lsp checker happy
 
 local home = os.getenv("HOME")
+if home == nil then
+    local handle = io.popen("whoami")
+    if handle ~= nil then
+        local user = handle:read("*a")
+        handle:close()
+        user = user:gsub("%s+$", "")
+        home = "/home/" .. user
+    end
+end
+
 local path = require('pl.path')
 
 local nvim_path = vim.loop.exepath()
@@ -77,7 +87,8 @@ require('lualine-config')
 require('nightfox-config')
 require('telescope-config')
 require('hop-config')
-require('leap-config')
+-- require('leap-config')
+-- require('flash-config')
 
 -- org
 require('orgmode-config')
