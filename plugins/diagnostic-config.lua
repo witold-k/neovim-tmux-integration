@@ -9,7 +9,7 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.HINT] = "󰌶 ", -- '󰌵',
         },
     },
-    virtual_text = false,
+    virtual_text = true,
     update_in_insert = true,
     underline = true,
     severity_sort = false,
@@ -20,5 +20,4 @@ vim.diagnostic.config({
         prefix = '',
     },
 })
-
 
