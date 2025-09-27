@@ -17,7 +17,7 @@ map('i', 'jk', '', {})
 -- Stay in indent mode
 keymap("v", "<", "<gv^", opts)
 keymap("v", ">", ">gv^", opts)
--- keymap("v", "p", '"_dP', opts)
+keymap("v", "p", '"_dP', opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)

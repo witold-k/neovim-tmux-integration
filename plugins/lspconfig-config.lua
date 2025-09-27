@@ -1,63 +1,47 @@
--- :h diagnostic-signs
-
-vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ", -- '', -- or other icon of your choice here, this is just what my config has:
-            [vim.diagnostic.severity.WARN] = "󰀪 ", -- '',
-            [vim.diagnostic.severity.INFO] = " ", -- '',
-            [vim.diagnostic.severity.HINT] = "󰌶 ", -- '󰌵',
-        },
-    },
-    virtual_text = false,
-    update_in_insert = true,
-    underline = true,
-    severity_sort = false,
-    float = {
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
-    },
-})
-
-local lspconfig = require('lspconfig')
-
--- c/c++
-lspconfig.clangd.setup {
-    cmd = {"clangd"},
-    filetypes = {"c", "cpp", "cc", "h", "hpp", "hh" },
+-- C/C++
+vim.lsp.config['clangd'] = {
+  cmd = { "clangd" },
+  filetypes = { "c", "cpp", "cc", "h", "hpp", "hh" },
 }
+vim.lsp.enable('clangd')
 
 -- Java
-lspconfig.jdtls.setup{}
+vim.lsp.config['jdtls'] = {}
+vim.lsp.enable('jdtls')
 
--- Python
-lspconfig.pyright.setup{}
+-- Python (Pyright)
+vim.lsp.config['pyright'] = {}
+vim.lsp.enable('pyright')
 
-lspconfig.pylsp.setup({
-    settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    enabled = true,
-                    ignore = { "E221", "E401", "E402" },
-                    maxLineLength = 119
-                }
-            }
-        }
-    }
-})
+-- Python (pylsp)
+vim.lsp.config['pylsp'] = {
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          enabled = true,
+          ignore = { "E221", "E401", "E402" },
+          maxLineLength = 119,
+        },
+      },
+    },
+  },
+}
+vim.lsp.enable('pylsp')
 
 -- Lua
-lspconfig.lua_ls.setup {}
+vim.lsp.config['lua_ls'] = {}
+vim.lsp.enable('lua_ls')
 
--- Latex
-lspconfig.texlab.setup {}
+-- LaTeX
+vim.lsp.config['texlab'] = {}
+vim.lsp.enable('texlab')
 
 -- Markdown
-lspconfig.marksman.setup {}
+vim.lsp.config['marksman'] = {}
+vim.lsp.enable('marksman')
 
--- json
-lspconfig.jsonnet_ls.setup {}
+-- JSONNet
+vim.lsp.config['jsonnet_ls'] = {}
+vim.lsp.enable('jsonnet_ls')
 

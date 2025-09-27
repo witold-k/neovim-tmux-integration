@@ -18,11 +18,6 @@ return require('lazy').setup({
     },
   },
 
-  {
-    'kiyoon/tmux-send.nvim',
-    keys = require('tmux-send-config').keys
-  },
-
   'nvim-lua/plenary.nvim',
 
   {
@@ -108,5 +103,9 @@ return require('lazy').setup({
     'folke/trouble.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
-  require('flash-config')
+  require('flash-config'),
+
+  -- ai
+  require('avante-config'),
+
 })
