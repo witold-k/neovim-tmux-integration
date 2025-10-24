@@ -3,7 +3,7 @@ require('nvim-treesitter.configs').setup {
       "rust", "toml",
       "c", "cpp", "java", "go", "glsl", "vala",
       "python", "javascript", "json", "julia", "r", "lua", "sql",
-      "xml", "cmake", "markdown", "meson", "csv", "yaml", "tex",
+      "xml", "cmake", "markdown", "meson", "csv", "yaml",
       "make", "just", "zig", "bitbake", "bash", "powershell",
       "gnuplot",
       "verilog", "vhdl"

@@ -103,15 +103,6 @@ return require('lazy').setup({
     'folke/trouble.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
-<<<<<<< HEAD
-  require('flash-config'),
-
-  -- ai
-  require('avante-config'),
-
-||||||| parent of 057aeb1 (do some updates)
-  require('flash-config')
-=======
   require('flash-config'),
 
   -- gitlab
@@ -120,5 +111,4 @@ return require('lazy').setup({
   -- ai
   require('avante-config'),
 
->>>>>>> 057aeb1 (do some updates)
 })
