@@ -13,6 +13,7 @@ vim.lsp.enable('jdtls')
 vim.lsp.config['pyright'] = {}
 vim.lsp.enable('pyright')
 
+<<<<<<< HEAD
 -- Python (pylsp)
 vim.lsp.config['pylsp'] = {
   settings = {
@@ -28,6 +29,37 @@ vim.lsp.config['pylsp'] = {
   },
 }
 vim.lsp.enable('pylsp')
+||||||| parent of 057aeb1 (do some updates)
+lspconfig.pylsp.setup({
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    enabled = true,
+                    ignore = { "E221", "E401", "E402" },
+                    maxLineLength = 119
+                }
+            }
+        }
+    }
+})
+=======
+-- Python (pylsp)
+vim.lsp.config['pylsp'] = {
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          enabled = true,
+          ignore = { "E221", "E241", "E401", "E402", "E722" },
+          maxLineLength = 119,
+        },
+      },
+    },
+  },
+}
+vim.lsp.enable('pylsp')
+>>>>>>> 057aeb1 (do some updates)
 
 -- Lua
 vim.lsp.config['lua_ls'] = {}

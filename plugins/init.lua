@@ -93,6 +93,8 @@ require('hop-config')
 -- org
 require('orgmode-config')
 
+require('open-files-config')
+
 vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })

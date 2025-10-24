@@ -2,26 +2,5 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-BUILD_TMP_DIR=.tmp
+just | fzy -x $SCRIPT_DIR/ned 
 
-if [ ! -d ~/$BUILD_TMP_DIR/work ]; then
-    mkdir -p ~/$BUILD_TMP_DIR/work
-fi
-
-build=~/$BUILD_TMP_DIR/work/build.log
-
-GTL=$(git rev-parse --show-toplevel)
-
-if [ -z "$GTL" ];
-then
-    make $@ |& tee $build
-else
-    make -C $GTL $@ |& tee $build
-fi
-
-echo $build
-
-if [ -s $build ];
-then
-    $(cat $build | fzy -x $SCRIPT_DIR/ned)
-fi

@@ -4,6 +4,8 @@ local doExecute = true -- false for debugging
 local Path = require "pl.path"
 
 local runtime_dir = os.getenv("XDG_RUNTIME_DIR")
+if not runtime_dir or runtime_dir == '' then runtime_dir = "/tmp" end
+
 local runtime_nvim = runtime_dir .. '/nvim'
 local pipepath = runtime_nvim .. '/ide.pipe'
 

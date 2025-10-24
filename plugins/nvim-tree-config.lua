@@ -25,19 +25,6 @@ local function tmux_ch_dir()
     os.execute(cmd)
 end
 
--- local function open_by_suffix()
---     local node = Api.tree.get_node_under_cursor()
---     local path = Path:new(node.absolute_path)
---     if (not path:is_dir()) then
---         local app = '';
---         local suffix = path.suffix();
---         if (suffix == '.pdf') then app = 'evince'; end
---
---         local cmd = app + '/' + path
---         os.execute(cmd)
---     end
--- end
-
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
 

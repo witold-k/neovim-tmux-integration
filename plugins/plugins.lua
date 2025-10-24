@@ -22,7 +22,7 @@ return require('lazy').setup({
 
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { {'nvim-lua/plenary.nvim'} }
+    dependencies = { 'nvim-lua/plenary.nvim' }
   },
 
   'neovim/nvim-lspconfig',
@@ -103,9 +103,22 @@ return require('lazy').setup({
     'folke/trouble.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons' }
   },
+<<<<<<< HEAD
   require('flash-config'),
 
   -- ai
   require('avante-config'),
 
+||||||| parent of 057aeb1 (do some updates)
+  require('flash-config')
+=======
+  require('flash-config'),
+
+  -- gitlab
+  -- require('gitlab-config'),
+
+  -- ai
+  require('avante-config'),
+
+>>>>>>> 057aeb1 (do some updates)
 })

@@ -1,3 +1,5 @@
+# DEPRECATED, needs update
+
 # Neovim Tmux integration
 
 a simple neovim tmux integration for an ide like user experience.
@@ -42,7 +44,7 @@ to start neovim with tmux just type in console:
 
 then install the packages in neovim:
 ```
-    :PackerUpdate
+    :Lazy
 ```
 
 after restart neovin install Mason packages:
