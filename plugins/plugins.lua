@@ -1,10 +1,10 @@
 
 return require('lazy').setup({
-  {
-   'vhyrro/luarocks.nvim',
-   -- 'camspiers/luarocks.nvim',
-    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-  },
+  -- {
+  --  'vhyrro/luarocks.nvim',
+  --  -- 'camspiers/luarocks.nvim',
+  --   priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+  -- },
   'pteroctopus/faster.nvim',
 
   {
@@ -67,7 +67,12 @@ return require('lazy').setup({
 
   'williamboman/mason-lspconfig.nvim',
 
-  'simrat39/rust-tools.nvim',
+  -- 'simrat39/rust-tools.nvim',
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
 
   -- debugger
   'mfussenegger/nvim-dap',

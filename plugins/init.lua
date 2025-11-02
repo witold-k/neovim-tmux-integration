@@ -24,7 +24,6 @@ local config_lua = config .. '/?.lua'
 package.path = package.path .. ';' .. config_lua .. ';' .. nvim_lua
 
 require('lazy-setup')
-require('neorocks-setup')
 
 -- line numbers
 vim.opt.number = true
@@ -61,7 +60,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 require('plugins')
-require('luarocks-config')
 
 require('keys')
 
@@ -75,7 +73,6 @@ require('mason-config')
 require('mason-lspconfig')
 require('maven-config')
 require('nvim-treesitter-config')
-require('rust-tools-config')
 require('trouble-config')
 
 -- completion / code generation
@@ -87,8 +84,6 @@ require('lualine-config')
 require('nightfox-config')
 require('telescope-config')
 require('hop-config')
--- require('leap-config')
--- require('flash-config')
 
 -- org
 require('orgmode-config')
