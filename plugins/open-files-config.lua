@@ -1,18 +1,26 @@
 -- Open binary files
 vim.api.nvim_create_autocmd("BufReadCmd", {
   pattern = { "*.pdf", },
-  callback = function()
-    local filename = vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
-    vim.cmd("silent !evince " .. filename .. " &")
-    vim.cmd("let tobedeleted = bufnr('%') | b# | exe \"bd! \" . tobedeleted")
+  callback = function(args)
+    local filename = vim.fn.expand(vim.api.nvim_buf_get_name(0))
+    vim.fn.jobstart({"mupdf", filename}, {detach = true})
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(args.buf) then
+        vim.api.nvim_buf_delete(args.buf, { force=true })
+      end
+    end)
   end
 })
 
 vim.api.nvim_create_autocmd("BufReadCmd", {
   pattern = { "*.png", "*.jpg", "*.JPG", "*.jpeg", "*.gif", "*.webp" },
-  callback = function()
-    local filename = vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
-    vim.cmd("silent !feh -F " .. filename .. " &")
-    vim.cmd("let tobedeleted = bufnr('%') | b# | exe \"bd! \" . tobedeleted")
+  callback = function(args)
+    local filename = vim.fn.expand(vim.api.nvim_buf_get_name(0))
+    vim.fn.jobstart({"feh", "-F", filename}, {detach = true})
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(args.buf) then
+        vim.api.nvim_buf_delete(args.buf, { force=true })
+      end
+    end)
   end
 })

@@ -67,7 +67,6 @@ return require('lazy').setup({
 
   'williamboman/mason-lspconfig.nvim',
 
-  -- 'simrat39/rust-tools.nvim',
   {
     'mrcjkb/rustaceanvim',
     version = '^6', -- Recommended
