@@ -18,6 +18,12 @@ map('i', 'jk', '', {})
 keymap("v", "<", "<gv^", opts)
 keymap("v", ">", ">gv^", opts)
 keymap("v", "p", '"_dP', opts)
+keymap("v", "c", '"_c', opts)
+
+-- Normal mode: remap delete to black hole
+vim.keymap.set("n", "d", '"_d', opts)
+vim.keymap.set("n", "dd", '"_dd', opts)
+vim.keymap.set("n", "D", '"_D', opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -29,29 +35,19 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 map('n', '<leader>n', [[:NvimTreeToggle<CR>]], {})
 map('n', '<leader>r', [[:Trouble diagnostics toggle<CR>]], {})
 map('n', '<F7>', [[:NvimTreeFindFile<CR>]], {})
---shell
-local function shell_escape(args)
-	local ret = {}
-	for _,a in pairs(args) do
-		local s = tostring(a)
-		if s:match("[^A-Za-z0-9_/:=-]") then
-			s = "'"..s:gsub("'", "'\\''").."'"
-		end
-		table.insert(ret,s)
-	end
-	return table.concat(ret, " ")
-end
 
 -- tmux
-function copy_register_to_tmux()
-    local yank = vim.fn.getreg('"')
-    local cmd = { "tmux",  "set-buffer", yank }
-    os.execute(shell_escape(cmd))
-    -- "tmux paste" for dump buffer content to terminal
+local function copy_register_to_tmux(register)
+    local yank = vim.fn.getreg(register)
+    local cmd = { "tmux",  "set-buffer", "-" }
+    local job_id = vim.fn.jobstart(cmd, { stdin = "pipe", detach = true })
+    vim.fn.chansend(job_id, yank)
+    vim.fn.chanclose(job_id, "stdin")
 end
 
 -- selection to tmux
-function copy_visual_to_tmux()
+local function copy_visual_to_tmux(yank)
+    --[[
     local s_start = vim.api.nvim_buf_get_mark(0, "<")
     local s_end   = vim.api.nvim_buf_get_mark(0, ">")
     local n_lines = math.abs(s_end[1] - s_start[1]) + 1
@@ -65,9 +61,13 @@ function copy_visual_to_tmux()
         lines[n_lines] = string.sub(lines[n_lines], 1, s_end[2])
     end
     local yank = table.concat(lines, '\n')
+    --]]
     -- print(vim.inspect(s_start) .. " " .. vim.inspect(s_end))
-    local cmd = { "tmux",  "set-buffer", yank }
-    os.execute(shell_escape(cmd))
+    --
+    local cmd = { "tmux",  "load-buffer", "-" }
+    local job_id = vim.fn.jobstart(cmd, { stdin = "pipe", detach = true })
+    vim.fn.chansend(job_id, yank)
+    vim.fn.chanclose(job_id, "stdin")
 end
 
 -- setup project dir, configures :makeprg=
@@ -80,9 +80,28 @@ function Load_neovim_project_config()
     return path
 end
 
-map('n', '<leader>y', [[ :lua copy_register_to_tmux()<CR> ]], { })
-map('v', '<leader>y', [[ :lua copy_visual_to_tmux()<CR> ]], { })
 map('n', '<C-x>', [[ :bp<bar>sp<bar>bn<bar>bd<CR> ]], { })
+-- In your Neovim config (init.lua or plugin file)
+
+local registers = {
+    '+', '-', '*', '%', '#', '.', ':', '"', '/', '=', '_',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+    'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+}
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    local ev = vim.v.event
+    local regtype = vim.v.event.regtype
+    local text = vim.fn.getreg(ev.regname)
+    -- Only run for visual yanks if you want
+    if regtype:match("[vV]") then
+      copy_visual_to_tmux(text)
+    end
+  end,
+})
 
 -- map setup project dir
 map('n', '<leader>s', [[ :lua Load_neovim_project_config()<CR> ]], { })
