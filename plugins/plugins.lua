@@ -30,7 +30,8 @@ return require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     -- :TSUpdate[Sync] doesn't exist until plugin/nvim-treesitter is loaded (i.e. not after first install); call update() directly
-    build = function() require("nvim-treesitter.install").update { with_sync = true } end
+    build = function() require("nvim-treesitter.install").update { with_sync = true } end,
+    config = function() require("nvim-treesitter").setup( require("nvim-treesitter-config") ) end,
   },
 
   {

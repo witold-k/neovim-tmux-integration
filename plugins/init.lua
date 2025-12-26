@@ -72,7 +72,6 @@ require('lspconfig-config')
 require('mason-config')
 require('mason-lspconfig')
 require('maven-config')
-require('nvim-treesitter-config')
 require('trouble-config')
 
 -- completion / code generation

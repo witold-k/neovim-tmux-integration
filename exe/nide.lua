@@ -43,3 +43,12 @@ if (doExecute) then
 else
     print('cmd = '.. cmd)
 end
+
+-- finally cleanup
+
+local ppath = require("pl.path")
+local home = ppath.expanduser("~")
+local pdir = require("pl.dir")
+local nvim_state = home .. "/.local/state/nvim"
+print("delete: " .. nvim_state)
+pdir.rmtree(nvim_state)

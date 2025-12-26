@@ -16,7 +16,7 @@ local argv = {
   "nvim",
   "--server", "/run/user/1000/nvim/ide.pipe",
   "--remote-send",
-  string.format("<C-\\><C-n>:call setreg('\"', readfile(\"%s\")) | call delete(\"%s\")<CR>", tmpfile, tmpfile)
+  string.format("<C-\\><C-n>:call setreg('t', readfile(\"%s\")) | call delete(\"%s\")<CR>", tmpfile, tmpfile)
 }
 
 -- handle, err = uv ...

@@ -12,7 +12,6 @@ require("mason-lspconfig").setup({
     ensure_installed = {
         "clangd",
         "grammarly",
-        "java_language_server",
         "cmake",
         "jdtls",
         "jsonnet_ls",
