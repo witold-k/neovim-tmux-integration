@@ -5,16 +5,28 @@ local os = require('os')
 local uv = require('luv')
 local tmpfile = os.tmpname()
 
+local handle = io.popen("id -u")
+local uid = "0"
+if handle ~= nil then
+    uid = handle:read("*a")
+    handle:close()
+end
+if uid then
+  uid = uid:match("%d+")
+end
+
 -- Write stdin (tmux will pipe the copied text here) into the file
 local fh = io.open(tmpfile, "w")
-for line in io.lines() do
-  fh:write(line, "\n")
+if fh ~= nil then
+  for line in io.lines() do
+    fh:write(line)
+  end
+  fh:close()
 end
-fh:close()
 
 local argv = {
   "nvim",
-  "--server", "/run/user/1000/nvim/ide.pipe",
+  "--server", "/run/user/" .. uid .. "/nvim/ide.pipe",
   "--remote-send",
   string.format("<C-\\><C-n>:call setreg('t', readfile(\"%s\")) | call delete(\"%s\")<CR>", tmpfile, tmpfile)
 }

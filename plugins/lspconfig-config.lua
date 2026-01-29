@@ -29,6 +29,11 @@ vim.lsp.config['pylsp'] = {
 }
 vim.lsp.enable('pylsp')
 
+-- Rust
+
+vim.lsp.config["rust_analyzer"] = {}
+vim.lsp.enable("rust_analyzer")
+
 -- Lua
 vim.lsp.config['lua_ls'] = {}
 vim.lsp.enable('lua_ls')
@@ -41,7 +46,17 @@ vim.lsp.enable('texlab')
 vim.lsp.config['marksman'] = {}
 vim.lsp.enable('marksman')
 
+-- OpenCL
+vim.lsp.config["opencl_ls"] = {
+  cmd = { "opencl_ls" },
+  filetypes = { "opencl", "cl" },
+}
+vim.lsp.enable("opencl_ls")
+
 -- JSONNet
 vim.lsp.config['jsonnet_ls'] = {}
 vim.lsp.enable('jsonnet_ls')
 
+
+-- general
+-- vim.lsp.inlay_hint.enable(true)

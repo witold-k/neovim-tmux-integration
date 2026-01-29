@@ -11,7 +11,6 @@ require("mason").setup({
 require("mason-lspconfig").setup({
     ensure_installed = {
         "clangd",
-        "grammarly",
         "cmake",
         "jdtls",
         "jsonnet_ls",
@@ -19,6 +18,7 @@ require("mason-lspconfig").setup({
         "marksman",
         "matlab_ls",
         "mesonlsp",
+        "opencl_ls",
         "pyright",
         "pylsp",
         "rust_analyzer",

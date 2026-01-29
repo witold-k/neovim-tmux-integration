@@ -12,7 +12,7 @@ local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- remap the key used to leave insert mode
-map('i', 'jk', '', {})
+-- map('i', 'jk', '', {})
 
 -- Stay in indent mode
 keymap("v", "<", "<gv^", opts)

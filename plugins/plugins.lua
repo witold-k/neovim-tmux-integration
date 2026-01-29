@@ -78,12 +78,6 @@ return require('lazy').setup({
   'mfussenegger/nvim-dap',
 
   {
-    "eatgrass/maven.nvim",
-    cmd = { "Maven", "MavenExec" },
-    dependencies = "nvim-lua/plenary.nvim"
-  },
-
-  {
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
     ft = { 'org' }
@@ -107,6 +101,14 @@ return require('lazy').setup({
   {
     'folke/trouble.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons' }
+  },
+
+  'mfussenegger/nvim-jdtls',
+  {
+    "eatgrass/maven.nvim",
+    cmd = { "Maven", "MavenExec" },
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function() require("maven").setup( require("maven-config") ) end,
   },
   require('flash-config'),
 
