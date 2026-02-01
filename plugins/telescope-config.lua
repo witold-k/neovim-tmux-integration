@@ -56,18 +56,31 @@ local lg = function()
     builtin.live_grep(opts)
 end
 
+-- for show list of all commands and use:
+-- lua require('telescope.builtin').builtin()
 
 vim.keymap.set('n', '<leader>ff', ff, {})
 vim.keymap.set('n', '<leader>fg', lg, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+vim.keymap.set('n', '<C-F4>', builtin.builtin, {})
+
 vim.keymap.set('n', '<C-F5>', ff, {})
 vim.keymap.set('n', '<C-F6>', lg, {})
 vim.keymap.set('n', '<C-F7>', builtin.buffers, {})
 vim.keymap.set('n', '<C-F8>', builtin.help_tags, {})
+vim.keymap.set('n', '<C-S-F5>', builtin.lsp_document_symbols, {})
+vim.keymap.set('n', '<C-S-F6>', builtin.lsp_workspace_symbols, {})
+vim.keymap.set('n', '<C-S-F7>', builtin.lsp_references, {})
+vim.keymap.set('n', '<C-S-F8>', builtin.lsp_implementations, {})
 
 vim.keymap.set('i', '<C-F5>', ff, {})
 vim.keymap.set('i', '<C-F6>', lg, {})
 vim.keymap.set('i', '<C-F7>', builtin.buffers, {})
 vim.keymap.set('i', '<C-F8>', builtin.help_tags, {})
+vim.keymap.set('i', '<C-S-F5>', builtin.lsp_document_symbols, {})
+vim.keymap.set('i', '<C-S-F6>', builtin.lsp_workspace_symbols, {})
+vim.keymap.set('i', '<C-S-F7>', builtin.lsp_references, {})
+vim.keymap.set('i', '<C-S-F8>', builtin.lsp_implementations, {})
+
