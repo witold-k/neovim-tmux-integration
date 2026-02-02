@@ -73,7 +73,9 @@ vim.keymap.set('n', '<C-F8>', builtin.help_tags, {})
 vim.keymap.set('n', '<C-S-F5>', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<C-S-F6>', builtin.lsp_workspace_symbols, {})
 vim.keymap.set('n', '<C-S-F7>', builtin.lsp_references, {})
-vim.keymap.set('n', '<C-S-F8>', builtin.lsp_implementations, {})
+vim.keymap.set('n', '<C-S-F8>', builtin.lsp_definitions, {})
+vim.keymap.set('n', '<C-S-F9>', builtin.lsp_implementations, {})
+
 
 vim.keymap.set('i', '<C-F5>', ff, {})
 vim.keymap.set('i', '<C-F6>', lg, {})
@@ -82,5 +84,6 @@ vim.keymap.set('i', '<C-F8>', builtin.help_tags, {})
 vim.keymap.set('i', '<C-S-F5>', builtin.lsp_document_symbols, {})
 vim.keymap.set('i', '<C-S-F6>', builtin.lsp_workspace_symbols, {})
 vim.keymap.set('i', '<C-S-F7>', builtin.lsp_references, {})
-vim.keymap.set('i', '<C-S-F8>', builtin.lsp_implementations, {})
+vim.keymap.set('i', '<C-S-F8>', builtin.lsp_definitions, {})
+vim.keymap.set('i', '<C-S-F9>', builtin.lsp_implementations, {})
 
