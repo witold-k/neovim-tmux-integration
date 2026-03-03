@@ -1,37 +1,89 @@
+local function exists(path)
+    -- File?
+    local f = io.open(path, "r")
+    if f then
+        f:close()
+        return true
+    end
+
+    -- Directory? (Try open "." inside)
+    local d = io.open(path .. "/.", "r")
+    if d then
+        d:close()
+        return true
+    end
+
+    return false
+end
+
+local function map(path, ro)
+    if ro == nil then ro = false end
+
+    if exists(path) then
+        return " -v " .. path .. ":" .. path .. (ro and ":ro" or "")
+    end
+
+    return ""
+end
+
+--
+
 local path
 local python_path = nil
+local docker_path = nil
+local docker_type = nil
 
-if python_path ~= nil then
+--
+
+if python_path == nil then
     path = '$HOME/svn/buildscripts/python'
-    if vim.loop.fs_stat(path) ~= nil then
+    if exists(path) then
         python_path = path
     end
 end
 
-if python_path ~= nil then
+if python_path == nil then
     path = '$HOME/repos/buildscripts/python'
-    if vim.loop.fs_stat(path) ~= nil then
+    if exists(path) then
         python_path = path
     end
 end
 
-if python_path ~= nil then
+if python_path == nil then
     path = '$HOME/repos/common-scripts/python'
-    if vim.loop.fs_stat(path) ~= nil then
+    if exists(path) then
         python_path = path
     end
 end
 
-if python_path ~= nil then
+if python_path == nil then
     path = '$HOME/depots/common-scripts/python'
-    if vim.loop.fs_stat(path) ~= nil then
+    if exists(path) then
         python_path = path
+    end
+end
+
+if docker_path == nil then
+    path = '/usr/bin/docker'
+    if exists(path) then
+        docker_path = path
+        docker_type = 'docker'
+    end
+end
+
+if docker_path == nil then
+    path = '/usr/bin/podman'
+    if exists(path) then
+        docker_path = path
+        docker_type = 'podman'
     end
 end
 
 local config = {
     goproxy = 'https://goproxy.io,direct',
     python_path = python_path,
+    docker_path = docker_path,
+    docker_type = docker_type,
 }
 
 local goproxy_env = 'GOPROXY=https://goproxy.io,direct'
@@ -47,6 +99,9 @@ return {
         ssl_cert_env = ssl_cert_env,
         python_path_env = python_path_env,
     },
-    env = curl_ca_env .. ' ' .. ssl_cert_env .. ' ' .. goproxy_env .. ' ' .. python_path_env
+    env = curl_ca_env .. ' ' .. ssl_cert_env .. ' ' .. goproxy_env .. ' ' .. python_path_env,
+    eenv = '-e ' .. curl_ca_env .. ' -e ' .. ssl_cert_env .. ' -e ' .. goproxy_env .. ' -e ' .. python_path_env,
+    exists = exists,
+    map = map
 }
 

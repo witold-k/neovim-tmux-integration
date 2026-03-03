@@ -34,7 +34,19 @@ if (attr == nil) or (attr.mode ~= "directory") then
 end
 
 local pipepath = runtime_nvim .. '/ide.pipe'
-local cmd = 'tmux send-keys -t ide C-m \"' .. conf.env .. ' nvim --listen ' .. pipepath .. '\" C-m'
+
+-- start neovim in tmux and opt in docker/podman
+
+local cwd = lfs.currentdir()
+local cmd_front = 'tmux send-keys -t ide C-m \"'
+local cmd_mid = nil
+if cwd:find("encapsulated") then
+    cmd_mid = conf.config.docker_path .. ' ' .. conf.eenv .. ' ' .. conf.map(cwd)
+else
+    cmd_mid = conf.env
+end
+local cmd_tail = ' nvim --listen ' .. pipepath .. '\" C-m'
+local cmd = cmd_front .. cmd_mid .. cmd_tail
 
 if (doExecute) then
     os.execute(cmd)
