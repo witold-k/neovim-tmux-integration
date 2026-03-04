@@ -20,9 +20,9 @@ fi
 
 echo "DIR:    $(pwd)"
 echo "PARAMS: $@"
-sudo -E -u $SYSTEM_NAME -g $SYSTEM_NAME -s /usr/bin/bash -c "$@"
+runuser -m -u $SYSTEM_NAME -g $SYSTEM_NAME -s /usr/bin/bash -c "$@"
 
 else
-    sudo -E -s /usr/bin/bash -c "$@"
+    runuser -m -s /usr/bin/bash -c "$@"
 fi
 

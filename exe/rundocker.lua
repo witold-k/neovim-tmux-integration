@@ -65,10 +65,10 @@ local function map_volumes_user(runtime_nvim)
         m = m .. map(runtime_nvim) .. ' '
     end
     m = m .. " -e SYSTEM_UID=" ..  get_user_id() ..
-        "-e SYSTEM_NAME=" .. user
+        " -e SYSTEM_NAME=" .. user
 
-    m = ' -v ' .. localPath .. '/entrypoint.sh:/entrypoint.sh '
-    m = m .. '--userns=keep-id '
+    m = m .. ' -v ' .. localPath .. '/entrypoint.sh:/entrypoint.sh '
+    m = m .. '--userns=keep-id --user root:root '
 
     m = m .. '--entrypoint /entrypoint.sh '
 
