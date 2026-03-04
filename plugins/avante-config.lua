@@ -10,17 +10,37 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
+    input = {
+      provider = "snacks",
+    },
     -- add any opts here
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "ollama",
+    provider = "local_llama",
     providers = {
+      -- to check models: curl http://127.0.0.1:8080/v1/models
+      local_llama = {
+        __inherited_from = "openai",
+        endpoint = "http://127.0.0.1:8080",
+        model = "Meta-Llama-3.1-8B-Instruct-Q5_K_M.gguf",
+        api_key_name = "",
+        api_key = "",
+      },
       ollama = {
         __inherited_from = "ollama",
         endpoint = "http://localhost:11434",
         model = "qwen2.5:32b",
         -- temperature = 0.5,
+      },
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-3-7-sonnet", -- Oder "claude-3-5-sonnet"
+        timeout = 30000, -- Timeout in Millisekunden
+        extra_request = {
+          temperature = 0,
+          max_tokens = 4096,
+        }
       },
     },
   },

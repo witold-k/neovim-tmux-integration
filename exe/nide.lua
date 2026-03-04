@@ -17,6 +17,8 @@ package.path = localPath .. "/?.lua;" .. package.path
 
 local conf = require('nide-config')
 local lfs = require "lfs"
+local pl_path = require("pl.path")
+local home = pl_path.expanduser("~")
 
 --
 
@@ -46,6 +48,7 @@ if cwd:find("encapsulated") then
         conf.map(cwd) .. ' ' ..
         conf.map('/lib/', true) .. ' ' ..
         conf.map('/opt/', true) .. ' ' ..
+        conf.map(home .. '/.config/nvim', true) .. ' ' ..
         conf.map(runtime_nvim) .. ' ' ..
         conf.config.image
 else
@@ -66,8 +69,6 @@ end
 
 -- finally cleanup
 
-local ppath = require("pl.path")
-local home = ppath.expanduser("~")
 local pdir = require("pl.dir")
 local nvim_state = home .. "/.local/state/nvim"
 print("delete: " .. nvim_state)
