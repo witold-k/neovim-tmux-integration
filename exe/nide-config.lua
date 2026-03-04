@@ -1,3 +1,6 @@
+local pl_path = require "pl.path"
+local pl_List = require "pl.List"
+
 local function exists(path)
     -- File?
     local f = io.open(path, "r")
@@ -14,6 +17,12 @@ local function exists(path)
     end
 
     return false
+end
+
+local function which(pathl, file)
+    local res = pathl:map(pl_path.join,file)
+    res = res:filter(pl_path.exists)
+    if res then return res[1] end
 end
 
 local function map(path, ro)
@@ -79,11 +88,15 @@ if docker_path == nil then
     end
 end
 
+local pathl = pl_List.split(os.getenv 'PATH', pl_path.dirsep)
 local config = {
     goproxy = 'https://goproxy.io,direct',
     python_path = python_path,
     docker_path = docker_path,
     docker_type = docker_type,
+    image       = 'ubuntu',
+    path        = pathl,
+    nvim_path   = which(pathl, "nvim"),
 }
 
 local goproxy_env = 'GOPROXY=https://goproxy.io,direct'
@@ -102,6 +115,7 @@ return {
     env = curl_ca_env .. ' ' .. ssl_cert_env .. ' ' .. goproxy_env .. ' ' .. python_path_env,
     eenv = '-e ' .. curl_ca_env .. ' -e ' .. ssl_cert_env .. ' -e ' .. goproxy_env .. ' -e ' .. python_path_env,
     exists = exists,
-    map = map
+    map = map,
+    which = which
 }
 

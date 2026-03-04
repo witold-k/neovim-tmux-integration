@@ -2,12 +2,19 @@ local doExecute = true -- false for debugging
 
 
 local Path = require "pl.path"
+local lfs = require "lfs"
 
 local runtime_dir = os.getenv("XDG_RUNTIME_DIR")
 if not runtime_dir or runtime_dir == '' then runtime_dir = "/tmp" end
 
 local runtime_nvim = runtime_dir .. '/nvim'
-local pipepath = runtime_nvim .. '/ide.pipe'
+local pipepath = nil
+local cwd = lfs.currentdir()
+if cwd:find("encapsulated") then
+    pipepath = runtime_nvim .. '/ide-enc.pipe'
+else
+    pipepath = runtime_nvim .. '/ide.pipe'
+end
 
 local function splitrowcol(inputstr)
     local t = {}
