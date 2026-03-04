@@ -16,13 +16,15 @@ package.path = localPath .. "/?.lua;" .. package.path
 --
 
 local conf = require('nide-config')
+local rundocker = require('rundocker')
 local lfs = require "lfs"
 local pl_path = require("pl.path")
 local home = pl_path.expanduser("~")
+local in_tmux = os.getenv("TMUX") ~= nil
 
 --
 
-if (doExecute) then os.execute("tmux new-session -d -s ide") end
+if (doExecute and not in_tmux) then os.execute("tmux new-session -d -s ide") end
 
 -- fixme: grep current user id
 local runtime_dir = os.getenv("XDG_RUNTIME_DIR")
@@ -44,12 +46,7 @@ local cmd_mid = nil
 if cwd:find("encapsulated") then
     pipepath = runtime_nvim .. '/ide-enc.pipe'
     cmd_mid = conf.config.docker_path .. ' run -it ' ..
-        conf.eenv .. ' ' ..
-        conf.map(cwd) .. ' ' ..
-        conf.map('/lib/', true) .. ' ' ..
-        conf.map('/opt/', true) .. ' ' ..
-        conf.map(home .. '/.config/nvim', true) .. ' ' ..
-        conf.map(runtime_nvim) .. ' ' ..
+        conf.eenv .. ' ' .. rundocker.map(runtime_nvim)  ..
         conf.config.image
 else
     pipepath = runtime_nvim .. '/ide.pipe'

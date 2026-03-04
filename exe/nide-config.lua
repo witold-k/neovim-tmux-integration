@@ -25,16 +25,6 @@ local function which(pathl, file)
     if res then return res[1] end
 end
 
-local function map(path, ro)
-    if ro == nil then ro = false end
-
-    if exists(path) then
-        return " -v " .. path .. ":" .. path .. (ro and ":ro" or "")
-    end
-
-    return ""
-end
-
 --
 
 local path
@@ -115,7 +105,6 @@ return {
     env = curl_ca_env .. ' ' .. ssl_cert_env .. ' ' .. goproxy_env .. ' ' .. python_path_env,
     eenv = '-e ' .. curl_ca_env .. ' -e ' .. ssl_cert_env .. ' -e ' .. goproxy_env .. ' -e ' .. python_path_env,
     exists = exists,
-    map = map,
     which = which
 }
 
