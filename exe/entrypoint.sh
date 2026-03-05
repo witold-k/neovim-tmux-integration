@@ -20,7 +20,7 @@ fi
 
 echo "DIR:    $(pwd)"
 echo "PARAMS: $@"
-runuser -m -u $SYSTEM_NAME -g $SYSTEM_NAME -s /usr/bin/bash -c "$@"
+runuser -m -u $SYSTEM_NAME -g $SYSTEM_NAME -- $@
 
 else
     runuser -m -s /usr/bin/bash -c "$@"

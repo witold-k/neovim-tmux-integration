@@ -1,7 +1,15 @@
 local pl_path = require "pl.path"
 local pl_List = require "pl.List"
+local python_path = nil
+local docker_path = nil
+local docker_type = nil
+local home = pl_path.expanduser("~")
+
+--
 
 local function exists(path)
+    if path == nil then return false end
+
     -- File?
     local f = io.open(path, "r")
     if f then
@@ -25,45 +33,28 @@ local function which(pathl, file)
     if res then return res[1] end
 end
 
+local function append_home_exists(path, check)
+    local cpath = home .. check
+    if exists(cpath) then
+        if path == nil then
+            return cpath
+        else
+            return cpath .. ':' .. path
+        end
+    else
+        return path
+    end
+end
+
 --
 
-local path
-local python_path = nil
-local docker_path = nil
-local docker_type = nil
-
---
-
-if python_path == nil then
-    path = '$HOME/svn/buildscripts/python'
-    if exists(path) then
-        python_path = path
-    end
-end
-
-if python_path == nil then
-    path = '$HOME/repos/buildscripts/python'
-    if exists(path) then
-        python_path = path
-    end
-end
-
-if python_path == nil then
-    path = '$HOME/repos/common-scripts/python'
-    if exists(path) then
-        python_path = path
-    end
-end
-
-if python_path == nil then
-    path = '$HOME/depots/common-scripts/python'
-    if exists(path) then
-        python_path = path
-    end
-end
+python_path = append_home_exists(python_path, '/svn/buildscripts/python')
+python_path = append_home_exists(python_path, '/repos/buildscripts/python')
+python_path = append_home_exists(python_path, '/repos/common-scripts/python')
+python_path = append_home_exists(python_path, '/depots/common-scripts/python')
 
 if docker_path == nil then
-    path = '/usr/bin/docker'
+    local path = '/usr/bin/docker'
     if exists(path) then
         docker_path = path
         docker_type = 'docker'
@@ -71,7 +62,7 @@ if docker_path == nil then
 end
 
 if docker_path == nil then
-    path = '/usr/bin/podman'
+    local path = '/usr/bin/podman'
     if exists(path) then
         docker_path = path
         docker_type = 'podman'
@@ -92,7 +83,7 @@ local config = {
 local goproxy_env = 'GOPROXY=https://goproxy.io,direct'
 local curl_ca_env = 'CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
 local ssl_cert_env = 'SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt'
-local python_path_env = 'PYTHONPATH=$HOME/svn/buildscripts/python'
+local python_path_env = 'PYTHONPATH=' .. python_path
 
 return {
     config = config,
