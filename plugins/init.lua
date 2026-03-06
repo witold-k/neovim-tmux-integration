@@ -11,18 +11,11 @@ if home == nil then
     end
 end
 
-local path = require('pl.path')
-
-local nvim_path = vim.loop.exepath()
-local nvim_lua  = path.normpath(nvim_path .. '/../../../share/nvim/runtime/lua') .. '/?.lua'
--- print('nvim main   lua path: ' .. nvim_lua)
-
 local config = home .. '/.config/nvim'
 local config_lua = config .. '/?.lua'
 -- print('nvim config lua path: ' .. config_lua)
-
-package.path = package.path .. ';' .. config_lua .. ';' .. nvim_lua
-
+package.path = package.path .. ';' .. config_lua
+require('init-path')
 require('lazy-setup')
 
 -- line numbers

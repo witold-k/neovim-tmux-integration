@@ -85,6 +85,10 @@ local curl_ca_env = 'CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
 local ssl_cert_env = 'SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt'
 local python_path_env = 'PYTHONPATH=' .. python_path
 
+local runtime_dir = os.getenv("XDG_RUNTIME_DIR")
+if not runtime_dir or runtime_dir == '' then runtime_dir = "/tmp" end
+local runtime_nvim = runtime_dir .. '/nvim'
+
 return {
     config = config,
     vars = {
@@ -96,6 +100,7 @@ return {
     env = curl_ca_env .. ' ' .. ssl_cert_env .. ' ' .. goproxy_env .. ' ' .. python_path_env,
     eenv = '-e ' .. curl_ca_env .. ' -e ' .. ssl_cert_env .. ' -e ' .. goproxy_env .. ' -e ' .. python_path_env,
     exists = exists,
-    which = which
+    which = which,
+    runtime_nvim = runtime_nvim
 }
 

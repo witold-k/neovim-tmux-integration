@@ -69,17 +69,24 @@ local function map_volumes_user(runtime_nvim)
         map(cwd) .. ' ' ..
         map('/lib/', true) .. ' ' ..
         map('/opt/', true) .. ' ' ..
+        map('/usr/', true) .. ' ' ..
+        map('/usr/lib/lua/', true) .. ' ' ..
+        map('/usr/share/lua/', true) .. ' ' ..
+        map('/usr/local/share/lua/', true) .. ' ' ..
+        map('/usr/local/lib/lua/', true) .. ' ' ..
         map_home('.config/nvim', true) .. ' ' ..
         map_home('.local/share/nvim', true) .. ' ' ..
         map(home .. '/svn/other/other/config/files/nvim', true) .. ' ' ..
         map(home .. '/svn/zz_nvim_config', true) .. ' ' ..
         map(runtime_nvim) .. ' '
+    m = m .. '--tmpfs ' .. home .. '_loc/.local/state:rw,size=100M'
     m = m .. " -e SYSTEM_UID=" .. get_user_id() ..
         " -e SYSTEM_NAME=" .. user
 
     m = m .. ' -v ' .. localPath .. '/entrypoint.sh:/entrypoint.sh '
     m = m .. '--userns=keep-id --user root:root '
-    m = m .. '--entrypoint /entrypoint.sh '
+    m = m .. '--workdir ' .. cwd
+    m = m .. ' --entrypoint /entrypoint.sh '
 
     return m
 end

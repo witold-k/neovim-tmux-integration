@@ -37,13 +37,9 @@ local in_tmux = os.getenv("TMUX") ~= nil
 
 if (doExecute and not in_tmux) then os.execute("tmux new-session -d -s ide") end
 
-local runtime_dir = os.getenv("XDG_RUNTIME_DIR")
-if not runtime_dir or runtime_dir == '' then runtime_dir = "/tmp" end
-local runtime_nvim = runtime_dir .. '/nvim'
-
-local attr = lfs.attributes(runtime_nvim)
+local attr = lfs.attributes(conf.runtime_nvim)
 if (attr == nil) or (attr.mode ~= "directory") then
-    lfs.mkdir(runtime_nvim)
+    lfs.mkdir(conf.runtime_nvim)
 end
 
 -- start neovim in tmux and opt in docker/podman
@@ -54,13 +50,13 @@ local cmd_front = 'tmux send-keys -t ide C-m \"'
 local cmd_mid = nil
 local cmd_tail = nil
 if cwd:find("encapsulated") then
-    pipepath = runtime_nvim .. '/ide-enc.pipe'
+    pipepath = conf.runtime_nvim .. '/ide-enc.pipe'
     cmd_mid = conf.config.docker_path .. ' run -it ' ..
-        conf.eenv .. ' ' .. rundocker.map(runtime_nvim)  ..
+        conf.eenv .. ' ' .. rundocker.map(conf.runtime_nvim)  ..
         conf.config.image
     cmd_tail = ' \\"' .. conf.config.nvim_path .. ' --listen ' .. pipepath .. '\\"\" C-m'
 else
-    pipepath = runtime_nvim .. '/ide.pipe'
+    pipepath = conf.runtime_nvim .. '/ide.pipe'
     cmd_mid = conf.env
     cmd_tail = ' ' .. conf.config.nvim_path .. ' --listen ' .. pipepath .. '\" C-m'
 end

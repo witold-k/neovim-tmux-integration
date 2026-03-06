@@ -1,9 +1,10 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 DEST_DIR=~/.config/nvim/
-if [ ! -d "$DEST_DIR" ];
+p=$DEST_DIR
+if [ ! -d "$p" ];
 then
-    mkdir -p $DEST_DIR
+    mkdir -p $p
 fi
 
 echo "INSTALLING Neovim plugins..."
@@ -11,10 +12,13 @@ echo "create links in $DEST_DIR ..."
 
 # copy local files
 cd $SCRIPT_DIR/plugins
-for FILE in $(ls)
+files=$(ls)
+cd $p || exit
+echo "install in $p"
+for FILE in $files
 do
     echo "install: $FILE"
-    ln -sf $SCRIPT_DIR/plugins/$FILE $DEST_DIR
+    ln -sf $SCRIPT_DIR/plugins/$FILE .
 done
 
 echo "copy start scripts in ~/bin ..."
