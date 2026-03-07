@@ -1,4 +1,4 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT_DIR="$(readlink -f $(cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd ))"
 
 DEST_DIR=~/.config/nvim/
 p=$DEST_DIR
@@ -8,10 +8,11 @@ then
 fi
 
 echo "INSTALLING Neovim plugins..."
-echo "create links in $DEST_DIR ..."
 
 # copy local files
 cd $SCRIPT_DIR/plugins
+echo "create links: $SCRIPT_DIR/plugins in $p .."
+
 files=$(ls)
 cd $p || exit
 echo "install in $p"

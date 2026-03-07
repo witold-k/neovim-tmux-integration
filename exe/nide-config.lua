@@ -39,7 +39,7 @@ local function append_home_exists(path, check)
         if path == nil then
             return cpath
         else
-            return cpath .. ':' .. path
+            return cpath .. ';' .. path
         end
     else
         return path

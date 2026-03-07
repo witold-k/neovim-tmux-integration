@@ -18,7 +18,9 @@ add_c("/usr/local/lib/lua/" .. version .. "/?.so")
 
 local path = require('pl.path')
 local nvim_path = vim.loop.exepath()
-local nvim_lua  = path.normpath(nvim_path .. '/../../../share/nvim/runtime/lua') .. '/?.lua'
-package.path = package.path .. ';' .. nvim_lua
+local nvim_root = path.normpath(nvim_path .. '/../../..')
 
-
+add(nvim_root .. '/share/nvim/runtime/lua/?.lua')
+add(nvim_root .. '/local/share/lua/' .. version .. '/?.lua')
+add(nvim_root .. '/local/share/lua/' .. version .. '/?/init.lua')
+add_c(nvim_root .. '/local/lib/lua/' .. version .. '/?.so')

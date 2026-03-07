@@ -77,7 +77,6 @@ local function map_volumes_user(runtime_nvim)
         map_home('.config/nvim', true) .. ' ' ..
         map_home('.local/share/nvim', true) .. ' ' ..
         map(home .. '/svn/other/other/config/files/nvim', true) .. ' ' ..
-        map(home .. '/svn/zz_nvim_config', true) .. ' ' ..
         map(runtime_nvim) .. ' '
     m = m .. '--tmpfs ' .. home .. '_loc/.local/state:rw,size=100M'
     m = m .. " -e SYSTEM_UID=" .. get_user_id() ..
