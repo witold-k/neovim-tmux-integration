@@ -46,6 +46,15 @@ local function map_home(path, ro)
     return ""
 end
 
+local function set_env(key)
+    local val = os.getenv(key)
+    if val == nil then
+        return ''
+    else
+        return '-e ' .. key .. '=' .. val
+    end
+end
+
 local function get_user_id()
     local handle = io.popen("id -u")
     local uid = "0"
@@ -84,7 +93,10 @@ local function map_volumes_user(runtime_nvim)
     m = m
         .. " -e SYSTEM_UID=" .. get_user_id()
         .. " -e SYSTEM_NAME=" .. user
-        .. " -e SYSTEM_PATH=" .. path
+        .. " -e SYSTEM_PATH=" .. path .. ' '
+
+    m = m .. set_env('RUSTUP_HOME') .. ' ' .. set_env('CARGO_HOME')
+    m = m .. set_env('PYTHONPATH')
 
     m = m .. ' -v ' .. localPath .. '/entrypoint.sh:/entrypoint.sh '
     m = m .. '--userns=keep-id --user root:root '
