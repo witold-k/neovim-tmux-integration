@@ -17,7 +17,7 @@ return {
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "local_llama",
+    provider = "local_deepseek_coder",
     providers = {
       -- to check models: curl http://127.0.0.1:8080/v1/models
       local_llama = {
@@ -27,6 +27,14 @@ return {
         api_key_name = "",
         api_key = "",
       },
+      local_deepseek_coder = {
+        __inherited_from = "openai",
+        endpoint = "http://127.0.0.1:8080",
+        model = "DeepSeek-Coder-V2-Lite-Instruct-Q4_K_L.gguf",
+        api_key_name = "",
+        api_key = "",
+      },
+
       ollama = {
         __inherited_from = "ollama",
         endpoint = "http://localhost:11434",
