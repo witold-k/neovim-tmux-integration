@@ -61,7 +61,6 @@ else
     cmd_tail = ' ' .. conf.config.nvim_path .. ' --listen ' .. pipepath .. '\" C-m'
 end
 local cmd = cmd_front .. cmd_mid .. cmd_tail
-print(cmd)
 
 if (doExecute) then
     os.execute(cmd)

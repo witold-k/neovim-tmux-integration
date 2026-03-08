@@ -64,6 +64,7 @@ local function map_volumes_user(runtime_nvim)
     local user = os.getenv("USER") or os.getenv("USERNAME")
     local cfp = get_current_file_path()
     local localPath = cfp:sub(1, cfp:find("/[^/]*$") - 1)
+    local path = os.getenv('PATH')
 
     local m =
         map(cwd) .. ' ' ..
@@ -79,8 +80,10 @@ local function map_volumes_user(runtime_nvim)
         map(home .. '/svn/other/other/config/files/nvim', true) .. ' ' ..
         map(runtime_nvim) .. ' '
     m = m .. '--tmpfs ' .. home .. '_loc/.local/state:rw,size=100M'
-    m = m .. " -e SYSTEM_UID=" .. get_user_id() ..
-        " -e SYSTEM_NAME=" .. user
+    m = m
+        .. " -e SYSTEM_UID=" .. get_user_id()
+        .. " -e SYSTEM_NAME=" .. user
+        .. " -e SYSTEM_PATH=" .. path
 
     m = m .. ' -v ' .. localPath .. '/entrypoint.sh:/entrypoint.sh '
     m = m .. '--userns=keep-id --user root:root '

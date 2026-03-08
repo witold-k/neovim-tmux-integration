@@ -20,9 +20,9 @@ fi
 
 echo "DIR:    $(pwd)"
 echo "PARAMS: $@"
-runuser -m -u $SYSTEM_NAME -g $SYSTEM_NAME -- $@
+runuser -m -u $SYSTEM_NAME -g $SYSTEM_NAME -- env PATH="$SYSTEM_PATH" $@
 
 else
-    runuser -m -s /usr/bin/bash -c "$@"
+    runuser -m -s /usr/bin/bash -c env "PATH=$SYSTEM_PATH" "$@"
 fi
 

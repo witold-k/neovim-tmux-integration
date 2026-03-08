@@ -23,18 +23,75 @@ LUA_VER=$(echo $LUA | awk '{print $2}')
 LUA_VER2=$(echo $LUA_VER | awk -F '.' '{print $1 "." $2}')
 LUA_DIR=$(readlink -m $(which lua)/../..)
 
-apt install -y lua5.1 liblua5.1-0-dev lua5.4 liblua5.4-dev
+apt install -y lua5.1 liblua5.1-0-dev lua5.4 liblua5.4-dev sudo apt libyaml-dev libgraphviz-dev libleveldb-dev libsqlite3-dev
+
 # LUA_INSTALL="luarocks --local --lua-version $LUA_VER2 --lua-dir $LUA_DIR install luafilesystem path"
 echo $LUA_INSTALL
 #$($LUA_INSTALL)
-luarocks --lua-version=5.1 install luafilesystem
-luarocks --lua-version=5.1 install luasystem
-luarocks --lua-version=5.1 install luv
-luarocks --lua-version=5.1 install path
-luarocks --lua-version=5.1 install penlight
 
-luarocks --lua-version=5.4 install luafilesystem
-luarocks --lua-version=5.4 install luasystem
-luarocks --lua-version=5.4 install luv
-luarocks --lua-version=5.4 install path
-luarocks --lua-version=5.4 install penlight
+install_lua_all() {
+    local versions=("5.1" "5.4")
+
+    # Convert all arguments into an array so we can iterate safely
+    local pkgs=("$@")
+
+    for ver in "${versions[@]}"; do
+        echo "====================================="
+        echo "=== Installing rocks for Lua $ver ==="
+        echo "====================================="
+
+        local i=0
+        while [ $i -lt ${#pkgs[@]} ]; do
+            local pkg="${pkgs[$i]}"
+            local next="${pkgs[$((i+1))]}"
+
+            # Detect if the next argument is a flag (starts with --)
+            local extra=""
+            if [[ "$next" == --* ]]; then
+                extra="$next"
+                i=$((i+1))  # Skip the flag in the next loop
+            fi
+
+            echo "=== Installing $pkg $extra for Lua $ver ..."
+            echo "luarocks --lua-version='$ver' install $pkg $extra"
+
+            if ! luarocks --lua-version="$ver" install $pkg $extra; then
+                echo "ERROR: Failed to install '$pkg' for Lua $ver" >&2
+                exit 1
+            fi
+
+            echo "Successfully installed $pkg for Lua $ver"
+            i=$((i+1))
+        done
+    done
+}
+
+install_lua() {
+    local version="$1"
+    shift
+
+    for pkg in "$@"; do
+        echo "Installing $pkg for Lua $version ..."
+        if ! luarocks --lua-version=$version install "$pkg"; then
+            echo "ERROR: Failed to install '$pkg' for Lua $version" >&2
+            exit 1
+        fi
+    done
+}
+
+install_lua_all \
+    lsqlite3 \
+    luasql-sqlite3 \
+    xxhash --from=http://mah0x211.github.io/rocks/ \
+    luafilesystem \
+    luasystem \
+    luv \
+    path \
+    penlight \
+    toml \
+    lyaml \
+    lua-cjson \
+    etlua \
+    lua-resty-xxhash \
+    luaposix \
+
