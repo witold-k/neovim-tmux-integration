@@ -3,12 +3,28 @@
 # later: local install lua version could be used
 #
 
+if [ -f ~/.curlrc ];
+then
+    source ~/.curlrc
+fi
 
 if [ "$USER" != "root" ];
 then
     echo "user is not root - executing as root"
-    sudo -E bash $0
+    sudo -E bash $0 $proxy
     exit
+fi
+
+if [ ! -z "$2" ];
+then
+    proxy="$2"
+fi
+if [ ! -z "$proxy" ];
+then
+    export http_proxy="$proxy"
+    export https_proxy="$proxy"
+    export HTTP_PROXY="$proxy"
+    export HTTPS_PROXY="$proxy"
 fi
 
 
