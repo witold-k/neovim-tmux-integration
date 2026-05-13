@@ -34,6 +34,14 @@ vim.lsp.enable('pylsp')
 vim.lsp.config["rust_analyzer"] = {}
 vim.lsp.enable("rust_analyzer")
 
+-- julia
+vim.lsp.config['julials'] = {}
+vim.lsp.enable('julials')
+
+-- just
+vim.lsp.config['just'] = {}
+vim.lsp.enable('just')
+
 -- Lua
 vim.lsp.config['lua_ls'] = {}
 vim.lsp.enable('lua_ls')

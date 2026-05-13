@@ -76,5 +76,5 @@ local pdir = require("pl.dir")
 local nvim_state = home .. "/.local/state/nvim"
 if get_nvim_count() == 0 then
     print("delete: " .. nvim_state)
-    pdir.rmtree(nvim_state)
+    -- pdir.rmtree(nvim_state)
 end

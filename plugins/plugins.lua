@@ -32,6 +32,7 @@ return require('lazy').setup({
     -- :TSUpdate[Sync] doesn't exist until plugin/nvim-treesitter is loaded (i.e. not after first install); call update() directly
     build = function() require("nvim-treesitter.install").update { with_sync = true } end,
     config = function() require("nvim-treesitter").setup( require("nvim-treesitter-config") ) end,
+    branch = "main",
   },
 
   {
@@ -114,6 +115,17 @@ return require('lazy').setup({
 
   -- gitlab
   -- require('gitlab-config'),
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    after = { 'nvim-treesitter' },
+    branch = "main",   -- IMPORTANT: avoid the broken master branch
+    config = function() require("render-markdown").setup( require("render-markdown-config") ) end,
+    opts = {
+      file_types = { "markdown", "Avante" },
+    },
+    ft = { "markdown", "Avante" },
+  },
 
   -- ai
   require('avante-config'),

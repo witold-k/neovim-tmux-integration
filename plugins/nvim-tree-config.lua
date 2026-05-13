@@ -20,8 +20,9 @@ local function tmux_ch_dir()
         path = path:parent()
     end
 
-    os.execute("tmux send-keys -t 1 C-c")
-    local cmd = "tmux send-keys -t 1 'cd " .. path.filename .. "' Enter"
+    local cmd = "env -u LD_LIBRARY_PATH tmux send-keys -t 1 'C-c'"
+    os.execute(cmd)
+    cmd = "env -u LD_LIBRARY_PATH tmux send-keys -t 1 'cd " .. path.filename .. "' Enter"
     os.execute(cmd)
 end
 
@@ -37,6 +38,7 @@ local function my_on_attach(bufnr)
 
   -- custom mappings
   vim.keymap.set('n', '<F4>', tmux_ch_dir,                     opts('ch dir'))
+  vim.keymap.set('n', '<S-F2>', [[:%s/\s\+/\r/g<CR>]], { desc = "Split whitespace into lines" })
   vim.keymap.set('n', 'u',    api.tree.change_root_to_parent,  opts('Up'))
   vim.keymap.set('n', '?',    api.tree.toggle_help,            opts('Help'))
 end
