@@ -48,8 +48,9 @@ end
 
 --
 
-python_path = append_home_exists(python_path, '/svn/buildscripts/python')
-python_path = append_home_exists(python_path, '/repos/buildscripts/python')
+python_path = append_home_exists(python_path, '.')
+python_path = append_home_exists(python_path, '/svn/buildscripts/python/lib')
+python_path = append_home_exists(python_path, '/repos/buildscripts/python/lib')
 python_path = append_home_exists(python_path, '/repos/common-scripts/python')
 python_path = append_home_exists(python_path, '/depots/common-scripts/python')
 

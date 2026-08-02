@@ -4,7 +4,7 @@ return {
   -- ⚠️ must add this setting! ! !
   build = vim.fn.has("win32") ~= 0
       and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-      or "make",
+      or "make BUILD_FROM_SOURCE=true",
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
   ---@module 'avante'
@@ -13,12 +13,25 @@ return {
     input = {
       provider = "snacks",
     },
+    agent = {
+      enabled = true,
+      debounce_ms = 100,
+      suppress_repeated_tool_calls = true,
+    },
     -- add any opts here
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "local_qwen",
+    provider = "local_llama",
     providers = {
+      toolbridge = {
+        __inherited_from = "openai",
+        endpoint = "http://localhost:3100/v1",
+        model = "llama",   -- oder der exakte Modellname aus /v1/models
+        api_key_name = "",
+        api_key = "", -- ToolBridge verlangt einen Key, aber ignoriert ihn
+      },
+
       -- to check models: curl http://127.0.0.1:8080/v1/models
       local_llama = {
         __inherited_from = "openai",
@@ -88,13 +101,18 @@ return {
         },
       },
     },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
-    },
+    --  is in top level already
+    -- {
+    --   -- Make sure to set this up properly if you have lazy=true
+    --   'MeanderingProgrammer/render-markdown.nvim',
+    --   branch = "main",   -- IMPORTANT: avoid the broken master branch
+    --   commit = false,
+    --   name = "render-markdown.nvim",
+    --   opts = {
+    --     file_types = { "markdown", "Avante" },
+    --   },
+    --   ft = { "markdown", "Avante" },
+    --   config = function() require("render-markdown").setup( require("render-markdown-config") ) end,
+    -- },
   },
 }

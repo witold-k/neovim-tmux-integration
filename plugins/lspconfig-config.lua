@@ -11,23 +11,10 @@ vim.lsp.enable('jdtls')
 
 -- Python (Pyright)
 vim.lsp.config['pyright'] = {}
-vim.lsp.enable('pyright')
+-- Python (ruff)
+vim.lsp.config['ruff'] = {}
 
--- Python (pylsp)
-vim.lsp.config['pylsp'] = {
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          enabled = true,
-          ignore = { "E221", "E241", "E401", "E402", "E722" },
-          maxLineLength = 119,
-        },
-      },
-    },
-  },
-}
-vim.lsp.enable('pylsp')
+vim.lsp.enable({ 'ruff', 'pyright' })
 
 -- Rust
 

@@ -1,5 +1,3 @@
-_G.vim = vim -- make lsp checker happy
-
 -- git clone --filter=blob:none --sparse http://github.com/ryanoasis/nerd-fonts
 -- cd nerd-fonts
 -- git sparse-checkout add patched-fonts/BitstreamVeraSansMono

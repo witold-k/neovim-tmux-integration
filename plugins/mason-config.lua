@@ -22,7 +22,7 @@ require("mason-lspconfig").setup({
         "mesonlsp",
         "opencl_ls",
         "pyright",
-        "pylsp",
+        "ruff",
         "rust_analyzer",
         "texlab",
         "yamlls",
